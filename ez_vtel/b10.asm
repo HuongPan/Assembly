@@ -18,12 +18,12 @@ sum		dword	0
 
 .code
 main proc
-	mov	edx , offset N_msg
+	mov	 edx , offset N_msg
 	call writestring
 	call readdec
-	mov	n, eax
+	mov	 n, eax
 
-	mov	edx , offset Arr_msg
+	mov	 edx , offset Arr_msg
 	call writestring 
 	
 	push n
@@ -34,7 +34,7 @@ main proc
 	push offset arr1
 	call evenSum
 
-	mov edx , offset ES_msg
+	mov  edx , offset ES_msg
 	call writestring
 	call WriteDec
 
@@ -44,7 +44,7 @@ main proc
 	push offset arr1
 	call oddSum
 
-	mov	edx , offset OS_msg
+	mov	 edx , offset OS_msg
 	call writestring 
 	call writedec
 	exit 
@@ -58,10 +58,10 @@ arrInp	proc uses ecx eax edi edx , mang: ptr dword , n1: dword
 	mov	edi , mang
 	mov	ecx , n1
 	L1:
-		call ReadDec
-		mov	 [edi] , eax
-		add	 edi , sz
-		loop L1	
+		call  ReadDec
+		mov	  [edi] , eax
+		add	  edi , sz
+		loop  L1	
 	ret
 arrInp	endp
 
