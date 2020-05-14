@@ -94,15 +94,10 @@ Start:
 			xor eax, eax
 		.elseif	uMsg == WM_COMMAND
 			mov eax , wParam
-			
-			.if eax == GetText
+			.if ax == Edit
 				invoke GetWindowText,hEdit,addr buf,sizeof buf
 				invoke str_rev,addr buf
-				invoke SendMessage,hWnd,WM_COMMAND,SetText,0
-			.elseif eax == SetText
 				invoke SetWindowText,hRead,addr buf
-			.elseif ax == Edit
-				invoke SendMessage,hWnd,WM_COMMAND,GetText,0
 			.endif		
 		.else
 			invoke DefWindowProc,hWnd,uMsg,wParam,lParam
@@ -113,27 +108,27 @@ Start:
 	WndProc endp
 
 	str_rev	proc uses eax ebx edi ecx edx, str2:ptr byte
-		mov     esi, str2   
+		mov     esi, str2   ; load up start pointer.
 
-	    mov     edi, str2  
+	    mov     edi, str2  ; set end pointer by finding zero byte.
     	dec     edi
 		find_end:
-    		inc     edi                 
-    		mov     al, [edi]           
+    		inc     edi                  ; advance end pointer.
+    		mov     al, [edi]            ; look for end of string.
     		cmp     al, 0
-    		jnz     find_end          
-    		dec     edi                  
+    		jnz     find_end             ; no, keep looking.
+    		dec     edi                  ; yes, adjust to last character.
 
 		swap_loop:
-    		cmp     esi, edi          
+    		cmp     esi, edi             ; if start >= end, then we are finished.
    			jge     finished
 
-    		mov     bl, [esi]        
+    		mov     bl, [esi]            ; swap over start and end characters.
     		mov     al, [edi]
     		mov     [esi], al
     		mov     [edi], bl
 
-    		inc     esi           
+    		inc     esi                  ; move pointers toward each other and continue.
     		dec     edi
     		jmp     swap_loop
 
