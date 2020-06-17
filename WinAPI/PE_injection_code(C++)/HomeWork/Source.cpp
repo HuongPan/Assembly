@@ -131,8 +131,6 @@ int main()
 	/*-------> Get ImageBase, Section Align, File Align, OEP  <-------------*/
 	getBuf(lfanew1 + 40);
 	OEP = char2int();
-	
-	overWrite(lfanew1 + 40, 4);
 	getBuf(lfanew1 + 52);
 	imageBase = char2int();
 	getBuf(lfanew1 + 56);
