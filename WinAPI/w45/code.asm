@@ -660,8 +660,6 @@ exportDirec proc
 local exportTableOffset: dword
 local numberName: DWORD 
 	pushad
-
-
 	mWrite<10,"ExportDirectory:",10>
 
 	mov ebx, sectionTableOffset
@@ -805,8 +803,9 @@ showOrdinal proc
 showOrdinal endp
 
 calRawOffset proc uses ebx VA_YouHave: DWORD	
-;;;;;;;;;; Raw Offset = VA_YouHave - VirtualOffsetOfSection + RawOffsetOfSection
-	
+;;;;;;;;;; Raw Offset = RVA_YouHave - ImageBase - VirtualOffsetOfSection + RawOffsetOfSection
+
+	;; RVA_UHave - VirtualOffsetOfSection ====> offset trên file của biến cần tính so với start offset của Section chứa nó
 	mov ebx , idataVA
 	sub ebx , idataRawData
 
@@ -833,7 +832,7 @@ calRawOffsetExD endp
 check_Directory	proc  VASection: DWORD , szSection : DWORD , direcRVA: DWORD
 local upperBound: DWORD 
 	
-	mov eax, szSection
+	mov eax, szSection		;; Virtural Size Section
 	add eax, VASection
 	mov upperBound, eax
 
