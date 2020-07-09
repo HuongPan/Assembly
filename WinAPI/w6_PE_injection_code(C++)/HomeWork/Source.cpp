@@ -116,8 +116,8 @@ int main()
 		"\x4d\x65\x73\x73\x54\x50\xff\xd6\x57\x68"
 		"\x72\x6c\x64\x21\x68\x6f\x20\x57\x6f\x68"
 		"\x48\x65\x6c\x6c\x8b\xcc\x57\x57\x51\x57"
-		"\xff\xd0";
-	char fileName[] = "C:\\Users\\Admin\\source\\repos\\HomeWork\\b00.exe";
+		"\xff\xd0"; // messageboxA();
+	char fileName[] = "C:\\Users\\Admin\\source\\repos\\HomeWork\\b.exe";
 	cout << "Enter your file path(with \\\\) :";
 	//cin >> fileName;
 	hFile = CreateFileA(fileName, GENERIC_READ + GENERIC_WRITE, FILE_SHARE_READ, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
